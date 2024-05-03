@@ -60,8 +60,6 @@ At this point, you should see a `Trust Policy` populated in a **json** format th
 10. Click on `View Role` to view the role created.<p>
 ![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/1788fe69-3acd-4f69-9b1d-9d9d6f972589)<p>
 
-
-
 ###  Building Infrastructure Using terraform and GitHub Action Pipeline
 1. Create a directory called **super_mario** and change directory into it. 
 ```
