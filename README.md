@@ -251,8 +251,21 @@ output "instance_ip_addr" {
   value = aws_instance.supermario_server.public_ip
 }
 ```
-### Create .github/workflows directory in the repo.
-5. Edit the backend.tf file.
+### Create GitHub Actions Workflows Directory in the repo.
+1. Create .github/workflows directory in the repo.
+```
+mkdir -p .github/workflows
+```
+2. Configure Git.
+git config --global user.name <username>
+git config --global user.email <user@example.com>
+
+3. Initialise/reinitialise the repo
+```
+git init
+```
+5.  
+6. Edit the backend.tf file.
 ```
 vi backend.tf
 ```
