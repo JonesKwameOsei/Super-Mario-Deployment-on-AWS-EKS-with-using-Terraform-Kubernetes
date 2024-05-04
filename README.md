@@ -387,7 +387,26 @@ Now we will click on the green button **Create pull request**. <p>
 ![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/b59319ba-a05a-4d69-be28-ec4aa4c6d21f)<p>
 To **Merge** the changes to the **main** branch, we will click on the green button **Merge pull request** and then **Confirm merge**. Confirming the nerge will trigger the actions.<p>
 ![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/6760ee8c-6f08-4549-8efa-f61bd20eabae)<p>
-Pull request successfully merged.<p>
+Pull request successfully merged and Github actions pipeline has run successfully.<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/4f77ace6-dcf5-45e6-951d-f18d271445f7)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/0e764595-aeb7-47b7-917f-f93980f26324)<p>
+### Confirm Deployments on AWS Console
+1. EC2 Instance named Supermario_server created with the following details:
+- Public IP Address: 54.170.82.23
+- Instance type: t2.micro
+- IAM Role: super_mario2
+**N/B**: This IAM role, `super-mario`, attached to the EC2 is different from the one we created in the IAM console, `super-mario`. Evidence is below:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/c3f7d028-c9ed-437f-b5f2-f38c2c4ecca6)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/61b44a69-8a9d-4b3c-b640-f2b4cbe07a2d)
+
+
+- Key Pair: MyMarioKeyPair<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/3ccb63f9-b873-43cc-8723-be2b6727a0ff)<p>
+2. Amazon S3 Bucket created with these deatials:
+- Bucket name: jones-shiny-tfbucket
+- Europe (Ireland) eu-west-1
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/1bf568ed-4248-4fca-b7df-82dac302708f)<p>
+
 
 
 7. Edit the backend.tf file.
