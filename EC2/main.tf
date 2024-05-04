@@ -1,5 +1,5 @@
-resource "aws_key_pair" "my_keypair" {
-  key_name   = var.key_name
+resource "aws_key_pair" "supermario_key" {
+  key_name   = "MySuperMarioKey"
   public_key = data.aws_key_pair.mario_keypair.id
 }
 
