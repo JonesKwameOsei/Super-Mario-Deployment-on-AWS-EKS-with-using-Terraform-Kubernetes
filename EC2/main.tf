@@ -1,7 +1,8 @@
 resource "aws_key_pair" "my_keypair" {
   key_name   = var.key_name
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("${path.module}/MyMarioKeyPair.pub")
 }
+
 
 resource "aws_instance" "supermario_server" {
   ami                  = data.aws_ami.ubuntu_latest.id
@@ -12,7 +13,7 @@ resource "aws_instance" "supermario_server" {
               sudo yum update -y
               sudo yum install -y docker
               sudo service docker start
-              sudo usermod -aG docker ec2-user
+              sudo usermod -aG docker ubuntu
               curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
               sudo install minikube /usr/local/bin/
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
