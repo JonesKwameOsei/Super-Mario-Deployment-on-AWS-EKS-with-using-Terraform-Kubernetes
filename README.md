@@ -264,8 +264,36 @@ git config --global user.email <user@example.com>
 ```
 git init
 ```
-5.  
-6. Edit the backend.tf file.
+5.  Create hub: Usually for a new repo. No need to run this command if the repo was cloned.
+```
+hub create
+```
+The command `hub create` is used in the context of the **GitHub** **Hub command-line** tool. This tool provides a convenient way to interact with **GitHub** from the command line.
+
+The `hub create` command is used to create a new GitHub repository directly from the command line, without needing to go to the GitHub website and manually create a new repository there.<p>
+
+When you run `hub create`, it will:
+
+- Prompt you to enter a name for the new repository.
+- Optionally, it can also prompt you to enter a description for the repository.
+- It will then create the new repository on GitHub using the provided name and description.
+
+After running `hub create`, we can then `cd` into the new repository directory and start working on the project, adding files, making commits, and pushing changes to the newly created GitHub repository.<p>
+
+This command can save time and streamline our GitHub workflow by allowing us to create new repositories directly from the command line, without having to switch contexts to the GitHub website.
+6. Create required GitHub secrets. To create the secret in GitHub:
+- In the GiHub repo, click on **Settings**
+- Then click on the **DropDown** next to **Secrets and Variables**<p>
+![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/1032987c-9041-4ee1-ab38-92e33b34e858)<p>
+- Next, click on **Actions**.<p>
+![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/0ce6d04a-9acd-4449-bbe1-5cbc3e2a790b)<p>
+- Click on **New repository secret** <p>
+![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/4c20a15f-bd1c-48bd-a040-6c11166da840)<p>
+- We will create 2 secrets for **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY**. Each will look like this:<p>
+![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/6714b39f-1a07-4865-a091-7b99b200546b)<p>
+![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/1222176c-d42c-4d92-8394-53bd8030325e)<p>
+
+7. Edit the backend.tf file.
 ```
 vi backend.tf
 ```
