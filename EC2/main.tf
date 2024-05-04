@@ -1,7 +1,7 @@
-resource "aws_key_pair" "supermario_key" {
-  key_name   = "MySuperMarioKey"
-  public_key = data.aws_key_pair.mario_keypair.id
-}
+# resource "aws_key_pair" "supermario_key" {
+#   key_name   = "MySuperMarioKey"
+#   public_key = data.aws_key_pair.mario_keypair.id
+# }
 
 # Resource block for ec2
 resource "aws_instance" "supermario_server" {
@@ -23,7 +23,7 @@ resource "aws_instance" "supermario_server" {
               unzip terraform.zip
               sudo mv terraform /usr/local/bin/
               EOF
-  key_name             = aws_key_pair.my_keypair.key_name
+  key_name             = data.aws_key_pair.mario_keypair.key_name
   security_groups      = [aws_security_group.mario_access.name]
   iam_instance_profile = aws_iam_instance_profile.super_mario2_profile.name
 
