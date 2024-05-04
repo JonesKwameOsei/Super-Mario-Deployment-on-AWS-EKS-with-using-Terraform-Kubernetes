@@ -27,7 +27,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
     - name: Initialize Terraform
-      run: terraform init -chdir=EC2.tf
+      run: terraform init
 
     - name: Choose Action
       id: choose_action
