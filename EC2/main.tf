@@ -3,7 +3,7 @@ resource "aws_key_pair" "my_keypair" {
   public_key = file("${path.module}/MyMarioKeyPair.pub")
 }
 
-
+# Resource block for ec2
 resource "aws_instance" "supermario_server" {
   ami                  = data.aws_ami.ubuntu_latest.id
   instance_type        = var.instance_type
