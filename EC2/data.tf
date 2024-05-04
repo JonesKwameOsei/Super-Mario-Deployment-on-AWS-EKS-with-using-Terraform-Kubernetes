@@ -22,4 +22,14 @@ data "template_file" "userdata" {
   template = file("${path.module}/userdata.tpl")
 }
 
+data "aws_key_pair" "mario_keypair" {
+  key_name           = "MyMarioKeyPair"
+  include_public_key = true
+
+  filter {
+    name   = "tag:Component"
+    values = ["web"]
+  }
+}
+
 

@@ -1,6 +1,6 @@
 resource "aws_key_pair" "my_keypair" {
   key_name   = var.key_name
-  public_key = file("${path.module}/MyMarioKeyPair.pub")
+  public_key = data.aws_key_pair.mario_keypair.id
 }
 
 # Resource block for ec2
