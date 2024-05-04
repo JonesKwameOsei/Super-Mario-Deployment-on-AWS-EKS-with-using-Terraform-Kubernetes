@@ -1,7 +1,8 @@
 resource "aws_key_pair" "my_keypair" {
   key_name   = var.key_name
-  public_key = var.keypair
+  public_key = file("${path.module}/MyMarioKeyPair.pub")
 }
+
 
 resource "aws_instance" "supermario_server" {
   ami                  = data.aws_ami.ubuntu_latest.id

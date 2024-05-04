@@ -10,12 +10,6 @@ variable "name" {
   default     = "Supermario_server"
 }
 
-variable "keypair" {
-  description = "public-key"
-  type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINuW8qGcHPTdPrGcum4GwnNlvFqNVW5uSk/kS7mXCkP6 KWAME@DESKTOP-Q57LJF8" # Default value assuming the key file is in the same directory
-}
-
 variable "key_name" {
   type        = string
   description = "Name of the keypair to ssh into the instance"
