@@ -290,8 +290,105 @@ This command can save time and streamline our GitHub workflow by allowing us to 
 - Click on **New repository secret** <p>
 ![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/4c20a15f-bd1c-48bd-a040-6c11166da840)<p>
 - We will create 2 secrets for **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY**. Each will look like this:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/bf5b9c52-c197-4d3c-a9c8-6bf764c514b0)<p>
+
 ![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/6714b39f-1a07-4865-a091-7b99b200546b)<p>
 ![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/1222176c-d42c-4d92-8394-53bd8030325e)<p>
+
+### Code Deployment with GitHub Actions
+We will need a **GitHub Action Workflows** to run the Terraform configurations in a pipeline. The workflows will be configured in a file called `action.yaml`:
+```
+name: Terraform Deploy AWS Infrastructure
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy AWS EC2 and S3 bucket
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults: 
+        run: 
+          working-directory: EC2.tf 
+          
+    env: 
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.2.11
+
+    - name: Initialize Terraform
+      run: terraform init EC2.tf
+
+    - name: Choose Action
+      id: choose_action
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "::set-output name=action::plan"
+        elif [ "${{ github.event_name }}" = "push" ]; then
+          echo "::set-output name=action::apply"
+        fi
+
+    - name: Terraform Action
+      run: |
+        action="${{ steps.choose_action.outputs.action }}"
+        if [ "$action" = "plan" ]; then
+          terraform plan EC2.tf
+        elif [ "$action" = "apply" ]; then
+          terraform apply -auto-approve EC2.tf
+        elif [ "$action" = "destroy" ]; then
+          terraform destroy -auto-approve EC2.tf
+        fi
+```
+The workflow configured is explained below:
+1. **Checkout the repository**: Checkout the code from the repository.
+2. **Setup Terraform**: Install the necessary Terraform version and Azure provider.
+3. **Initialize Terraform**: Run `terraform init` to initialize the working directory.
+4. **Validate Terraform configuration**: Run `terraform validate` to check the syntax and validity of the Terraform configuration.
+5. **Apply Terraform changes**: Run `terraform apply` to deploy the infrastructure changes.<p>
+Before we push the changes to activate the pipeline actions, let us confirm there are no resources in the AWS cloud destination, `eu-west-1: Ireland`:<p>
+No EC2 Instance resource:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/c02bbab4-69e3-462a-9307-9fc4833521de)<p>
+No S3 Bucket:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/38381fed-6024-4222-8b83-b8f579a7c26f)<p>
+There is one `IAM Role` named **super_mario:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/eb1425e5-cebf-470e-a362-e5706421f07f)<p>
+
+### Push Changes to GitHub to activate Github Action
+The GitHub Actions workflow is triggered on push events to the main branch, ensuring that any changes to the Terraform configuration are automatically deployed to the Azure environment. It is recommended to push the changes from a different branch, then merge it with the main branch by making a **pull request**.
+```
+git checkout -b deployAWSInfra        # Creates a new braanch and switch into it from the main
+
+git add .                               # Adds the changes to the repo
+
+git status                              # Lists the changes to be commited or pushed to the repo
+
+git commit -m "commit message"          # States the reason for the push or changes
+
+git push origin deployAWSInfra          # pushes the changes to the repo from the new branch
+```
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/883b58df-3719-4083-b19c-03ab03da579a)<p>
+We need to create the pull request to merge the changes to the main branch to trigger the actions.<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/dc570eb8-7f08-4de3-bd5a-df2984ad90ac)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/d70959ff-88dc-4689-985b-c1423ab05d75)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/1aa35062-6b61-4a54-a8f2-bc1381cc3f43)<p>
+Now we will click on the green button **Create pull request**. <p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/b59319ba-a05a-4d69-be28-ec4aa4c6d21f)<p>
+To **Merge** the changes to the **main** branch, we will click on the green button **Merge pull request** and then **Confirm merge**. Confirming the nerge will trigger the actions.<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/6760ee8c-6f08-4549-8efa-f61bd20eabae)<p>
+Pull request successfully merged.<p>
+
 
 7. Edit the backend.tf file.
 ```
