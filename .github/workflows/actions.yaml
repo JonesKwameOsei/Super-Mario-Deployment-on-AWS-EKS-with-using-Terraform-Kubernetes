@@ -14,19 +14,17 @@ jobs:
     defaults: 
         run: 
           working-directory: EC2.tf 
-          
+
     env: 
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
-    - name: Checkout repository
+    - name: Checkout repo
       uses: actions/checkout@v4
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.2.11
 
     - name: Initialize Terraform
       run: terraform init EC2.tf
