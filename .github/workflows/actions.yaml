@@ -42,9 +42,9 @@ jobs:
       run: |
         action="${{ steps.choose_action.outputs.action }}"
         if [ "$action" = "plan" ]; then
-          terraform plan EC2.tf
+          terraform plan -out=tfmarioplan
         elif [ "$action" = "apply" ]; then
-          terraform apply -auto-approve EC2.tf
+          terraform apply -auto-approve 
         elif [ "$action" = "destroy" ]; then
-          terraform destroy -auto-approve EC2.tf
+          terraform destroy -auto-approve 
         fi
