@@ -24,12 +24,6 @@ data "template_file" "userdata" {
 
 data "aws_key_pair" "mario_keypair" {
   key_name           = "MyMarioKeyPair"
-  include_public_key = true
-
-  filter {
-    name   = "MyMarioKeyPair"
-    values = ["web"]
-  }
 }
 
 
