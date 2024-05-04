@@ -13,7 +13,7 @@ variable "name" {
 variable "key_file_path" {
   description = "Path to the public key file"
   type        = string
-  default     = "id_rsa.pub" # Default value assuming the key file is in the same directory
+  default     = "./key/id_rsa.pub" # Default value assuming the key file is in the same directory
 }
 
 variable "key_name" {
