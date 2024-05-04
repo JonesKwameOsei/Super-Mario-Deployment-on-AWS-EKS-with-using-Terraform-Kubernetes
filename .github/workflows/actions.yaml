@@ -1,0 +1,52 @@
+name: Terraform Deploy AWS Infrastructure
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy AWS EC2 and S3 bucket
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults: 
+        run: 
+          working-directory: EC2.tf 
+          
+    env: 
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.2.11
+
+    - name: Initialize Terraform
+      run: terraform init EC2.tf
+
+    - name: Choose Action
+      id: choose_action
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          echo "::set-output name=action::plan"
+        elif [ "${{ github.event_name }}" = "push" ]; then
+          echo "::set-output name=action::apply"
+        fi
+
+    - name: Terraform Action
+      run: |
+        action="${{ steps.choose_action.outputs.action }}"
+        if [ "$action" = "plan" ]; then
+          terraform plan EC2.tf
+        elif [ "$action" = "apply" ]; then
+          terraform apply -auto-approve EC2.tf
+        elif [ "$action" = "destroy" ]; then
+          terraform destroy -auto-approve EC2.tf
+        fi
