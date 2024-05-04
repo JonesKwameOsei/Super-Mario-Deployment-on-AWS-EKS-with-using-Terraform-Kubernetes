@@ -27,7 +27,7 @@ data "aws_key_pair" "mario_keypair" {
   include_public_key = true
 
   filter {
-    name   = "tag:Component"
+    name   = "MyMarioKeyPair"
     values = ["web"]
   }
 }
