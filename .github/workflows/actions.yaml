@@ -2,6 +2,15 @@ name: Terraform Deploy AWS Infrastructure
 
 # Controls when the workflow will run
 on:
+  workflow_dispatch:
+    inputs:
+      terraform_action:
+        type: choice
+        description: Select Terraform action
+        options:
+        - apply
+        - destroy
+        required: true
   push:
     branches:
       - main
@@ -11,13 +20,13 @@ jobs:
     name: Deploy AWS EC2 and S3 bucket
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults: 
-        run: 
-          working-directory: EC2 
+    defaults:
+      run:
+        working-directory: EC2
 
-    env: 
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
     - name: Checkout repo
@@ -29,22 +38,21 @@ jobs:
     - name: Initialize Terraform
       run: terraform init
 
-    - name: Choose Action
-      id: choose_action
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          echo "::set-output name=action::plan"
-        elif [ "${{ github.event_name }}" = "push" ]; then
-          echo "::set-output name=action::apply"
-        fi
+    - name: Terraform Validate
+      run: terraform validate
 
-    - name: Terraform Action
+    - name: Terraform Plan
+      run: terraform plan
+
+    - name: Terraform Apply or Destroy
       run: |
-        action="${{ steps.choose_action.outputs.action }}"
-        if [ "$action" = "plan" ]; then
-          terraform plan -out=tfmarioplan
-        elif [ "$action" = "apply" ]; then
-          terraform apply -auto-approve 
-        elif [ "$action" = "destroy" ]; then
-          terraform destroy -auto-approve 
+        if [ "${{ github.event.inputs.terraform_action }}" == "apply" ]; then
+          echo "Applying Terraform changes"
+          terraform apply -auto-approve
+        elif [ "${{ github.event.inputs.terraform_action }}" == "destroy" ]; then
+          echo "Destroying Terraform infrastructure"
+          terraform destroy -auto-approve
+        else
+          echo "Invalid Terraform action selected"
+          exit 1
         fi
