@@ -1,4 +1,4 @@
-![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/278c12de-c27a-42ff-8d35-7f0989b2b5a2)# Super-Mario-Deployment-on-Kubernetes-using-terraform
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/278c12de-c27a-42ff-8d35-7f0989b2b5a2)# Super-Mario-Deployment-on-Kubernetes-using-terraform 
 Deploying One of the World's most popular game, Super Mario, on Amazon Elastic Kubernetes Service with **Terraform** and **Continuous Integration** and **Continuous Development** (CI/CD).
 ## Project Overview
 Our childhood days were lot of fun because one game entertained us and this game is the famous **Super Mario**. Many of us can never forget this game, hence, we will deploy it on **Amazon EKS**. Terraform will be utilised to build the infrastructure in the AWS cloud. Then we will deploy the Terraform code with a CI/CD pipeline GitHub actions.  
