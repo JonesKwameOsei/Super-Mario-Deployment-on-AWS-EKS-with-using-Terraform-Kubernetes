@@ -798,6 +798,20 @@ Reousrces destroyed.<p>
 cd EKS-TF
 terraform destroy --auto-approve
 ```
+Eight(8) EKS eources destroyed:<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/bf03517e-9aa2-4736-abc0-839748497b2e)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/c123f561-4923-4e04-b7e4-4ca4fd4ba0e6)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/cfb03a23-eafd-4806-bc4a-6e0cee8cf0ec)<p>
+3. Destroy EC2 Instance created with the GitHub pipeline actions. 
+We will Click on the work flow drop doen and choose `Destroy`. Then click run workflow. <p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/4ff8aebc-d70e-4243-807f-cd220faa686f)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/79d37366-e225-48a8-a41b-d7d304fa219e)
+
+
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/3fac5fde-0a31-48bf-b6fa-c63c625e6f6a)<p>
+
+
+
 
 
 
