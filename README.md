@@ -253,14 +253,15 @@ output "instance_ip_addr" {
 mkdir -p .github/workflows
 ```
 2. Configure Git.
+```
 git config --global user.name <username>
 git config --global user.email <user@example.com>
-
+```
 3. Initialise/reinitialise the repo
 ```
 git init
 ```
-5.  Create hub: Usually for a new repo. No need to run this command if the repo was cloned.
+4.  Create hub: Usually for a new repo. No need to run this command if the repo was cloned.
 ```
 hub create
 ```
@@ -277,7 +278,7 @@ When you run `hub create`, it will:
 After running `hub create`, we can then `cd` into the new repository directory and start working on the project, adding files, making commits, and pushing changes to the newly created GitHub repository.<p>
 
 This command can save time and streamline our GitHub workflow by allowing us to create new repositories directly from the command line, without having to switch contexts to the GitHub website.
-6. Create required GitHub secrets. To create the secret in GitHub:
+5. Create required GitHub secrets. To create the secret in GitHub:
 - In the GiHub repo, click on **Settings**
 - Then click on the **DropDown** next to **Secrets and Variables**<p>
 ![image](https://github.com/JonesKwameOsei/Automate-Azure-SQL-Database-Deployment-with-Terraform/assets/81886509/1032987c-9041-4ee1-ab38-92e33b34e858)<p>
