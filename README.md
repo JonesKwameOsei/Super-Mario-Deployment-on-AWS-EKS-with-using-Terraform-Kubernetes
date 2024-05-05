@@ -1,4 +1,4 @@
-![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/278c12de-c27a-42ff-8d35-7f0989b2b5a2)# Super-Mario-Deployment-on-Kubernetes-using-terraform 
+# Super-Mario-Deployment-on-Kubernetes-using-terraform 
 Deploying One of the World's most popular game, Super Mario, on Amazon Elastic Kubernetes Service with **Terraform** and **Continuous Integration** and **Continuous Development** (CI/CD).
 ## Project Overview
 Our childhood days were lot of fun because one game entertained us and this game is the famous **Super Mario**. Many of us can never forget this game, hence, we will deploy it on **Amazon EKS**. Terraform will be utilised to build the infrastructure in the AWS cloud. Then we will deploy the Terraform code with a CI/CD pipeline GitHub actions.  
@@ -805,12 +805,17 @@ Eight(8) EKS eources destroyed:<p>
 3. Destroy EC2 Instance created with the GitHub pipeline actions. 
 We will Click on the work flow drop doen and choose `Destroy`. Then click run workflow. <p>
 ![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/4ff8aebc-d70e-4243-807f-cd220faa686f)<p>
-![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/79d37366-e225-48a8-a41b-d7d304fa219e)
-
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/79d37366-e225-48a8-a41b-d7d304fa219e)<p>
+![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/533baea5-0c92-4f54-ad2b-68926c0b9e21)<p>
 
 ![image](https://github.com/JonesKwameOsei/Super-Mario-Deployment-on-Kubernetes-using-terraform/assets/81886509/3fac5fde-0a31-48bf-b6fa-c63c625e6f6a)<p>
 
+## Conclusion
+Through this comprehensive DevOps project, I have successfully leveraged a range of cutting-edge technologies to deploy the beloved Super Mario game on the robust AWS EKS (Elastic Kubernetes Service) platform. By seamlessly integrating Terraform, Docker, and Kubernetes, I have demonstrated my proficiency in infrastructure as code, containerization, and container orchestration.<p>
 
+The incorporation of GitHub Actions into my workflow has further streamlined the deployment process, allowing me to automatically provision the initial EC2 instance and S3 bucket to store the Terraform state file. This approach not only enhances the efficiency of my deployment but also ensures the reliability and reproducibility of my infrastructure.<p>
+
+The successful completion of this project showcases my mastery of DevOps principles, my ability to navigate complex cloud environments, and my dedication to delivering high-quality, scalable, and maintainable applications.<p>
 
 
 
