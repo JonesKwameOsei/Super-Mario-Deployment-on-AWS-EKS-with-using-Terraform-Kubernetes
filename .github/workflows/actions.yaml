@@ -35,24 +35,38 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: Initialize Terraform
-      run: terraform init
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
 
-    - name: Terraform Validate
-      run: terraform validate
-
-    - name: Terraform Plan
-      run: terraform plan
-
-    - name: Terraform Apply or Destroy
-      run: |
-        if [ "${{ github.event.inputs.terraform_action }}" == "apply" ]; then
-          echo "Applying Terraform changes"
-          terraform apply -auto-approve
-        elif [ "${{ github.event.inputs.terraform_action }}" == "destroy" ]; then
-          echo "Destroying Terraform infrastructure"
-          terraform destroy -auto-approve
-        else
-          echo "Invalid Terraform action selected"
-          exit 1
-        fi
+    - name: Terraform plan
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: 'plan'
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+      
+    - name: Terraform apply
+      if: ${{ github.event.inputs.terraform_action == 'apply' }}
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: ${{ github.event.inputs.terraform_action }}
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+        args: '-auto-approve'
+    
+    - name: Terraform destroy
+      if: ${{ github.event.inputs.terraform_action == 'destroy' }}
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.14.3
+        tf_actions_subcommand: ${{ github.event.inputs.terraform_action }}
+        tf_actions_working_dir: '.'
+        tf_actions_comment: true
+        args: '-auto-approve'
