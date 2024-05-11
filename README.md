@@ -149,22 +149,6 @@ data "aws_key_pair" "mario_keypair" {
 resource "aws_instance" "supermario_server" {
   ami                  = data.aws_ami.ubuntu_latest.id
   instance_type        = var.instance_type
-  // User data script to install Minikube, Docker, Terraform, and AWS CLI
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo yum update -y
-              sudo yum install -y docker
-              sudo service docker start
-              sudo usermod -aG docker ubuntu
-              curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-              sudo install minikube /usr/local/bin/
-              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              unzip awscliv2.zip
-              sudo ./aws/install
-              curl -o terraform.zip https://releases.hashicorp.com/terraform/1.2.11/terraform_1.2.11_linux_amd64.zip // Replace with the desired Terraform version
-              unzip terraform.zip
-              sudo mv terraform /usr/local/bin/
-              EOF
   key_name             = data.aws_key_pair.mario_keypair.key_name
   security_groups      = [aws_security_group.mario_access.name]
   iam_instance_profile = aws_iam_instance_profile.super_mario2_profile.name
