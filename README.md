@@ -1,4 +1,4 @@
-# Super-Mari Deployment on AWS EKS with Docker, Kubernetes Terraform and Github Actions 
+# Super-Mario Deployment on AWS EKS with Docker, Kubernetes Terraform and Github Actions 
 Deploying One of the World's most popular game, Super Mario, on Amazon Elastic Kubernetes Service with **Terraform** and **Continuous Integration** and **Continuous Development** (CI/CD).
 ## Project Overview
 Our childhood days were lot of fun because one game entertained us and this game is the famous **Super Mario**. Many of us can never forget this game, hence, we will deploy it on **Amazon EKS**. Terraform will be utilised to build the infrastructure in the AWS cloud. Then we will deploy the Terraform code with a CI/CD pipeline GitHub actions.  
